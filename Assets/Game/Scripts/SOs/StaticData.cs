@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using DatCong;
 using UnityEngine;
 
-public class StaticData : MonoBehaviour
+[CreateAssetMenu(fileName = "StaticData",menuName = "SO/StaticData")]
+public class StaticData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject[] circlePrefabs;
+    public GameObject[] CirclePrefabs => circlePrefabs;
+
+
+    [Header("Levels")] [SerializeField] private List<ListToDictionNary<string,LevelData>> levelDatas;
+    //Dictionnary for fast 
+    private Dictionary<string, LevelData> levelDatasDic;
+    public Dictionary<string, LevelData> LevelDatas
     {
-        
+        get
+        {
+            if (levelDatasDic == null)
+            {
+                levelDatasDic = levelDatas.ConvertListToDic();
+            }
+
+            return levelDatasDic;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }
+
+

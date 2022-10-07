@@ -3,23 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using PathCreation;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class NewBehaviourScript : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour,IPointerClickHandler
 {
-    [SerializeField] private PathCreator pathCreator;
-    [SerializeField] private float speed;
+    
+        
 
-
-    private float distancTravel;
-    private void Update()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        distancTravel += Time.deltaTime * speed;
-        if (distancTravel >= pathCreator.path.length)
-        {
-            distancTravel = pathCreator.path.length-0.001f;
-        }
-        // pathCreator.path.GetPointAtDistance()
-        transform.position = pathCreator.path.GetPointAtDistance(distancTravel);
-        transform.rotation = pathCreator.path.GetRotationAtDistance(distancTravel);
+        Debug.Log("Okia"); 
     }
 }

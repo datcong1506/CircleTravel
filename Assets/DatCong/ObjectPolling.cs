@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 [Serializable]
 public class ObjectPolling
@@ -13,9 +14,9 @@ public class ObjectPolling
         get => polls;
         set => polls = value;
     }
+   
     private Dictionary<GameObject, byte> _avaiableObjects;
     private Dictionary<GameObject, byte> _unAvaibaleObjects;
-    public Dictionary<GameObject, byte> UnAvaibaleObjects => _unAvaibaleObjects;
     [SerializeField] private GameObject _originPool;
     [SerializeField] private GameObject _owner;
     [SerializeField] private Transform _container;
@@ -204,5 +205,31 @@ public class PollContainer : MonoBehaviour
     public void Initial(GameObject owner)
     {
         _owner = owner;
+    }
+}
+
+
+//NOTE: will refactor this
+public class PollsCache<T> where  T : class
+{
+    private Dictionary<T, ObjectPolling> pollCache;
+
+    
+    public PollsCache()
+    {
+        pollCache = new Dictionary<T, ObjectPolling>();
+    }
+    public GameObject Instantiate(T from)
+    {
+        if (!pollCache.ContainsKey(from))
+        {
+            pollCache.Add(from,new ObjectPolling(null,from as GameObject));
+        }
+        return pollCache[from].Instantiate();
+    }
+
+    public Dictionary<T, ObjectPolling> GetPoll()
+    {
+        return pollCache;
     }
 }

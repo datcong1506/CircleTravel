@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3ed0d495578f94d9cbaf25653b2b86, type: 3}
+  m_Name: StaticData
+  m_EditorClassIdentifier: 
+  circlePrefabs:
+  - {fileID: 935636891117012774, guid: 69d52ced86df4b7409f6eeb93681604c, type: 3}
+  levelDatas:
+  - Key: Level_1
+    Value: {fileID: 11400000, guid: 9a99b45be6967854f8757236b2c9624a, type: 2}
+  - Key: Level_2
+    Value: {fileID: 11400000, guid: 1926b55a865e8184680b36803d7f8b3b, type: 2}
