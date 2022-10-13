@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7245892918343471533}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.11, y: 0, z: 0}
+  m_LocalPosition: {x: 3.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 7245892920150053561}
-  spawnRate: 2
+  spawnRate: 1
   startSpawnTime: 1
-  spawnCount: 15
+  spawnCount: 100
 --- !u!1 &7245892919776579264
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7245892919776579264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.11, y: 0, z: 0}
+  m_LocalPosition: {x: -3.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -149,12 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34352abdd64e50a4c836ea4132f79853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pillarControllers:
+  postControllers:
   - {fileID: 3148373264487283737}
   - {fileID: 7573973895835363255}
   roadControllers:
   - {fileID: 807461039676906850}
-  circleCount: 10
+  circleCount: 1000
 --- !u!1 &7245892919960909464
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,18 +269,18 @@ MonoBehaviour:
     _bezierPath:
       points:
       - {x: -3.8947752, y: 0, z: -1.1543386}
-      - {x: -2.973515, y: 0, z: -1.1146696}
-      - {x: -2.2506466, y: 0, z: -0.92011243}
-      - {x: -1.4128784, y: 0, z: -0.89097464}
-      - {x: -0.062342882, y: 0, z: -0.84400266}
-      - {x: 1.9778526, y: 0, z: -0.5001736}
-      - {x: 3.312699, y: 0, z: -0.2896092}
-      - {x: 4.0271206, y: 0, z: -0.17691344}
-      - {x: 4.5308514, y: 0, z: 0.042541087}
-      - {x: 5.59472, y: 0, z: 0.22914982}
-      - {x: 7.945283, y: 0, z: 0.6414523}
-      - {x: 9.97675, y: 0, z: 0.9020376}
-      - {x: 11.649077, y: 0, z: 1.1603937}
+      - {x: -3.20765, y: 0, z: -0.5283642}
+      - {x: -2.3506815, y: 0, z: 2.3973262}
+      - {x: 0.27688944, y: 0, z: 1.4574176}
+      - {x: 1.7739503, y: 0, z: 0.92190385}
+      - {x: 2.623368, y: 0, z: 0.17951623}
+      - {x: 3.4134386, y: 0, z: -0.20317197}
+      - {x: 4.813818, y: 0, z: -0.8814769}
+      - {x: 5.6978345, y: 0, z: -0.80687094}
+      - {x: 7.4065685, y: 0, z: -0.29925346}
+      - {x: 9.694212, y: 0, z: 0.38034195}
+      - {x: 11.913829, y: 0, z: 2.068365}
+      - {x: 11.649744, y: 0, z: 6.421794}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
     vertexPathMaxAngleError: 2.7
     vertexPathMinVertexSpacing: 0
     showTransformTool: 0
-    showPathBounds: 1
+    showPathBounds: 0
     showPerSegmentBounds: 0
     displayAnchorPoints: 1
     displayControlPoints: 1
@@ -310,7 +310,7 @@ MonoBehaviour:
     keepConstantHandleSize: 0
     showNormalsInVertexMode: 0
     showBezierPathInVertexMode: 0
-    showDisplayOptions: 0
+    showDisplayOptions: 1
     showPathOptions: 1
     showVertexPathDisplayOptions: 0
     showVertexPathOptions: 1
@@ -446,7 +446,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.12
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
@@ -456,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.39
+      value: -2.14
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
@@ -492,6 +492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760438908103813382, guid: 8e214a2b7427f91459a72ee825a7f1ab,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e214a2b7427f91459a72ee825a7f1ab, type: 3}

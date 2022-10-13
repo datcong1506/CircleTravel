@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PathCreation;
 using UnityEngine;
 
+[Serializable]
 public enum CircleState
 {
     Init,
@@ -18,19 +19,36 @@ public class CircleController : MonoBehaviour
     private PathCreator pathCreator;
     [SerializeField]private float speed;
     [SerializeField] private MeshRenderer meshRender;
+    
+    private Color skinColor;
     public Color SkinColor
     {
         get
         {
-            return meshRender.material.color;
+            return skinColor;
         }
     }
     private float timeFromSpawn;
     [SerializeField] private Transform selfTransform;
+    public Transform SelfTransform => selfTransform;
     //State
-    private CircleState circleState;
+    [SerializeField]private CircleState circleState;
     //
+
+    [SerializeField] private GameObject circleOnAirPrefab;
     
+    private void Awake()
+    {
+        CacheComponentManager.Instance.CCCache.Add(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (CacheComponentManager.Instance != null)
+        {
+            CacheComponentManager.Instance.CCCache.Remove(gameObject);
+        }
+    }
 
     public void Init(PathCreator pathCreator, float speed, Material material)
     {
@@ -39,6 +57,8 @@ public class CircleController : MonoBehaviour
         meshRender.material = material;
         circleState = CircleState.Move;
         timeFromSpawn = 0;
+        selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
+
     }
     public void Init(PathCreator pathCreator, Material material)
     {
@@ -53,10 +73,17 @@ public class CircleController : MonoBehaviour
         circleState = CircleState.Move;
         timeFromSpawn = 0;
         selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
-
     }
 
 
+     public void SetColor(Color color)
+     {
+         skinColor = color;
+         meshRender.material.color = skinColor;
+     }
+     
+     
+     
     private void Update()
     {
         Move();
@@ -66,7 +93,7 @@ public class CircleController : MonoBehaviour
     private void Move()
     {
         timeFromSpawn += Time.deltaTime;
-        if (circleState == CircleState.Move)
+        if (circleState == CircleState.Move||circleState==CircleState.Take)
         {
             var distance = speed * timeFromSpawn;
             if (distance >= pathCreator.path.length - 0.0001f)
@@ -76,16 +103,51 @@ public class CircleController : MonoBehaviour
             selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
         }
     }
+    
 
-    public void OnBeTakingHandle(Vector3 touchPosision)
+
+    public bool CanBeTaken()
     {
-        
+        return true;
     }
 
+    public GameObject OnBeTake()
+    {
+        circleState = CircleState.Take;
+        var color = GetColor(0.4f);
+        meshRender.material.color = color;
+        return PollManager.Instance.CircleOnAirPoll.Instantiate(circleOnAirPrefab);
+    }
+
+    private Color GetColor(float alpha)
+    {
+        var color = SkinColor;
+        color.a = alpha;
+        return color;
+    }
+    
+    public void BackToRoad()
+    {
+        circleState = CircleState.Move;
+        meshRender.material.color = skinColor;
+    }
+
+    public void DropToPost()
+    {
+        gameObject.SetActive(false);
+    }
+    
+    
     public void OnDropHandle()
     {
         
     }
+
+    private void UpdatePosision(Vector3 posision)
+    {
+        selfTransform.position = posision;
+    }
+    
 
     private void OnMouseDown()
     {

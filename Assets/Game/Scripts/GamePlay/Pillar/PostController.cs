@@ -2,33 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PillarController : MonoBehaviour
+public class PostController : MonoBehaviour
 {
     [SerializeField] private Transform selfTransform;
     public Transform SelfTransform => selfTransform;
     [SerializeField] private MeshRenderer meshRenderer;
 
+    [SerializeField] private Transform topTF;
 
+    private Color skinColor;
     public Color SkinColor
     {
         get
         {
-            return meshRenderer.material.color;
+            return skinColor;
         }
     }
     
 
     public void Init(Color color)
     {
-        meshRenderer.material.color = color;
+        skinColor = color;
+        meshRenderer.material.color = skinColor;
     }
 
 
 
 
-    private bool CanDrop(CircleController circleController)
+    public bool CanDrop(CircleController circleController)
     {
         return circleController.SkinColor == SkinColor;
     }
+
+
+    public void DropToPost(CircleDropController circleDropController)
+    {
+        circleDropController.Init(SkinColor,topTF.position);
+    }
+    
 
 }
