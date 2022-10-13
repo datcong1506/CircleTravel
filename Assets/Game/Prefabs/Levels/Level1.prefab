@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 7245892920150053561}
-  spawnRate: 2
+  spawnRate: 1
   startSpawnTime: 1
   spawnCount: 15
 --- !u!1 &7245892919776579264
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34352abdd64e50a4c836ea4132f79853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pillarControllers:
+  postControllers:
   - {fileID: 3148373264487283737}
   - {fileID: 7573973895835363255}
   roadControllers:
@@ -492,6 +492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760438908103813382, guid: 8e214a2b7427f91459a72ee825a7f1ab,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e214a2b7427f91459a72ee825a7f1ab, type: 3}

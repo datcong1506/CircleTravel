@@ -30,9 +30,8 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        EnhancedTouchSupport.Enable();
-        TouchSimulation.Enable();
         Init();
+        Play();
     }
 
     private void OnDestroy()
@@ -44,7 +43,7 @@ public class GameManager : Singleton<GameManager>
     private void Init()
     {
         SetGameInput();
-        StartLevel();
+        playerController.Init(gameInput.Player);
     }
 
     private void SetGameInput()
@@ -60,8 +59,9 @@ public class GameManager : Singleton<GameManager>
     // Be called By UI Event 
     //
     public void Play()
-    {
-        
+    { 
+        StartLevel();
+        playerController.Play();
     }
     
     //
@@ -91,7 +91,6 @@ public class GameManager : Singleton<GameManager>
     {
         UnLoadLevel();
         LoadLevel();
-        playerController.Init(gameInput.Player);
     }
     
 

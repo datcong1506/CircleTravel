@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
 
-    [SerializeField] private PillarController[] pillarControllers;
+    [SerializeField] private PostController[] postControllers;
     [SerializeField] private RoadController[] roadControllers;
     
     //NOTE: This must greater or equal than pollarController's Length
@@ -14,19 +15,23 @@ public class LevelController : MonoBehaviour
 
     private Color[] colorPatllets;
     
+    //NOTE: use this to spawn color circle
+    private Dictionary<Color, int> colorStorages;
+
     
     public void Init()
     {
-        colorPatllets = GetRandomColor();
+        colorPatllets = GetRandomColors();
+        SetColorStorage();
         SetPillars();
         SetRoads();
     }
 
     private void SetPillars()
     {
-        for (int i = 0; i < pillarControllers.Length; i++)
+        for (int i = 0; i < postControllers.Length; i++)
         {
-            var pillar = pillarControllers[i];
+            var pillar = postControllers[i];
             pillar.Init(colorPatllets[i]);
         }
     }
@@ -48,22 +53,51 @@ public class LevelController : MonoBehaviour
       
     }
 
-    
 
+    private void SetColorStorage()
+    {
+        colorStorages = new Dictionary<Color, int>();
+        for (int i = 0; i < colorPatllets.Length; i++)
+        {
+            colorStorages.Add(colorPatllets[i],0);
+        }
+    }
+    
+    
     //NOTE: This is complex
     // UNDONE
     //
-    public CircleController GetCircle()
+    public CircleController SpawnCircle()
     {
         //For now just return default circle in polling
-        return PollManager.Instance.CirclePoll.Instantiate(GameManager.Instance.GameDataController.GetCirclePrefab()).GetComponent<CircleController>();
+        var circleControlelr= PollManager.Instance.CirclePoll.Instantiate(GameManager.Instance.GameDataController.GetCirclePrefab()).GetComponent<CircleController>();
+        var randomColor = GetRandomColor();
+        circleControlelr.SetColor(randomColor);
+        colorStorages[randomColor] = colorStorages[randomColor] + 1;
+        return circleControlelr;
     }
 
 
-
-    private Color[] GetRandomColor()
+    private Color GetRandomColor()
     {
-        var pillarCount = pillarControllers.Length;
+        Color color=Color.white;
+        int min=1000;
+        for (int i = 0; i < colorStorages.Count; i++)
+        {
+            var colorStorage = colorStorages.ElementAt(i);
+            if (colorStorage.Value < min)
+            {
+                min = colorStorage.Value;
+                color = colorStorage.Key;
+            }
+        }
+        return color;
+    }
+    
+    
+    private Color[] GetRandomColors()
+    {
+        var pillarCount = postControllers.Length;
         Color[] colors = new Color[pillarCount];
 
 

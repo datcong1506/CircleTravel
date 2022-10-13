@@ -33,7 +33,7 @@ public class RoadController : MonoBehaviour
 
     private void SpawnCircle()
     {
-        var circleCCL = levelController.GetCircle();
+        var circleCCL = levelController.SpawnCircle();
         circleCCL.Init(pathCreator);
     }
 }

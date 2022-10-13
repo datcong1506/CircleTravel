@@ -5,13 +5,13 @@ using PathCreation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NewBehaviourScript : MonoBehaviour,IPointerClickHandler
+public class NewBehaviourScript : MonoBehaviour
 {
-    
-        
 
-    public void OnPointerClick(PointerEventData eventData)
+    [SerializeField] private PathCreator pathCreator;
+
+    private void Update()
     {
-        Debug.Log("Okia"); 
+        pathCreator.bezierPath.SetPoint(0,Vector3.left);
     }
 }
