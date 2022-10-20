@@ -19,7 +19,6 @@ public class CircleDropController : MonoBehaviour
 
 
 
-    private VertexPath vertexPath;
     private void OnDisable()
     {
         OnDespawn();
@@ -30,63 +29,22 @@ public class CircleDropController : MonoBehaviour
         moveToTarget = true;
         target = dropPosision;
         s = 0;
-        SetPath();
         Throw();
     }
 
-   
-
+    
     private void OnDespawn()
     {
       
     }
     
-    private void Update()
-    {
-        /*
-        MoveToTarget();
-    */
-    }
-
     public void SetPosision(Vector3 posision)
     {
         selfTransform.position = posision;
         startPosision = posision;
     }
 
-
-    private void MoveToTarget()
-    {
-        if (moveToTarget)
-        {
-            s += speed * Time.deltaTime;
-            if (s >= vertexPath.length)
-            {
-                s = vertexPath.length - 0.01f;
-            }
-
-            selfTransform.position = vertexPath.GetPointAtDistance(s);
-            if ((selfTransform.position - target).magnitude < 0.1f)
-            {
-                rigidbody.velocity=Vector3.down;
-                moveToTarget = false;
-            }
-        }
-    }
-
-    private void SetPath()
-    {
-        var point = new Vector3[4];
-        point[0] = startPosision;;
-        point[1] = startPosision+Vector3.up*1;;
-        point[2] = target+Vector3.up*0.1f;;
-        point[3] = target;;
-
-        var path = new BezierPath(point, false, PathSpace.xyz);
-        vertexPath = new VertexPath(path, GameManager.Instance.SelfTransform);
-
-    }
-
+    
     private float gravity = -10f;
     private void Throw()
     {

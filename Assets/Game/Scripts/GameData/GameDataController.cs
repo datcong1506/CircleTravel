@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 using DatCong;
 
 public class GameDataController : MonoBehaviour
@@ -67,6 +68,16 @@ public class GameDataController : MonoBehaviour
         return staticData.LevelDatas[DynamicData.CurrentLevel];
     }
 
+
+    public void NextLevel()
+    {
+        var currentLevel = GetCurrentLevel();
+        var hasNextLevel = currentLevel.Nextlevel != null;
+        if (hasNextLevel)
+        {
+            DynamicData.CurrentLevel = currentLevel.Nextlevel.name;
+        }
+    }
 
 
 

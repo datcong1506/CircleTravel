@@ -14,7 +14,7 @@ public enum CircleState
     Place,
 }
 
-public class CircleController : MonoBehaviour
+public class CircleController : MonoBehaviour,IInitAble,IDeSpawn
 {
     private PathCreator pathCreator;
     [SerializeField]private float speed;
@@ -36,19 +36,17 @@ public class CircleController : MonoBehaviour
     //
 
     [SerializeField] private GameObject circleOnAirPrefab;
-    
-    private void Awake()
+
+    private void OnEnable()
     {
-        CacheComponentManager.Instance.CCCache.Add(gameObject);
+        Init();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        if (CacheComponentManager.Instance != null)
-        {
-            CacheComponentManager.Instance.CCCache.Remove(gameObject);
-        }
+        DeSpawn();
     }
+
 
     public void Init(PathCreator pathCreator, float speed, Material material)
     {
@@ -99,6 +97,8 @@ public class CircleController : MonoBehaviour
             if (distance >= pathCreator.path.length - 0.0001f)
             {
                 gameObject.SetActive(false);
+                // lose game
+                GameManager.Instance.Lose();
             }
             selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
         }
@@ -147,10 +147,17 @@ public class CircleController : MonoBehaviour
     {
         selfTransform.position = posision;
     }
-    
 
-    private void OnMouseDown()
+    public void Init()
     {
-        Debug.Log("okia");
+        CacheComponentManager.Instance.CCCache.Add(gameObject);
+    }
+
+    public void DeSpawn()
+    {
+        if (CacheComponentManager.Instance != null)
+        {
+            CacheComponentManager.Instance.CCCache.Remove(gameObject);
+        }
     }
 }

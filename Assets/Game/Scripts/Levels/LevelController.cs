@@ -7,12 +7,13 @@ public class LevelController : MonoBehaviour
 {
 
     [SerializeField] private PostController[] postControllers;
+    public PostController[] PostControllers => postControllers;
     [SerializeField] private RoadController[] roadControllers;
-    
+    public RoadController[] RoadControllers => roadControllers;
     //NOTE: This must greater or equal than pollarController's Length
     [Header("Greater or equal piller count")]
     [SerializeField]private int circleCount;
-
+    public int CircleCount => circleCount;
     private Color[] colorPatllets;
     
     //NOTE: use this to spawn color circle

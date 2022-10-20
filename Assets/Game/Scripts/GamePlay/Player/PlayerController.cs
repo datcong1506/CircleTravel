@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 10000, postLayer))
             {
-                if (hit.collider.TryGetComponent<PostController>(out var postController))
+                if(CacheComponentManager.Instance.PostCache.TryGet(hit.collider.gameObject,out var postController))
                 {
                     if (postController.CanDrop(currentCircleController))
                     {
@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour
                         circleOnAirController.gameObject.SetActive(false);
                         playerState = PlayerState.Relax;
                         currentCircleController.DropToPost();
+                        GameManager.Instance.CircleCount++;
                         return;
                     }
                 }

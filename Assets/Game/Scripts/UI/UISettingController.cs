@@ -14,6 +14,13 @@ public class UISettingController : UICanvas
     }
 
 
+    public void VibButton()
+    {
+        Debug.Log("okia");
+        animator.SetBool("UseVib",!animator.GetBool("UseVib"));
+
+    }
+    
     public void ExitButton()
     {
         Exit();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface InitAble
+public interface IInitAble
 {
     public void Init();
 }

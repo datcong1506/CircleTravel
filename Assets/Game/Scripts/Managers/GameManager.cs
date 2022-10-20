@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : Singleton<GameManager>,IInitAble
 {
     [SerializeField]private GameDataController gameDataController;
     public GameDataController GameDataController => gameDataController;
@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     private LevelData levelData;
     [Header("Runtime Set")] [SerializeField]
     private LevelController currentLevelCCL;
-
+    public LevelController CurrentLevelCcl => currentLevelCCL;
 
     //Player
     [SerializeField] private PlayerController playerController;
@@ -31,7 +31,47 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Transform selfTransform;
     public Transform SelfTransform => selfTransform;
     //
+    private float startPlayTime;
+
+    public float EclapseTime
+    {
+        get
+        {
+            return Time.time - startPlayTime;
+        }
+    }
     
+
+    private int circleCount = 0;
+
+    public int CircleCount
+    {
+        get
+        {
+            int total = 0;
+            if (currentLevelCCL != null)
+            {
+                foreach (var post in currentLevelCCL.PostControllers)
+                {
+                    total += post.CircleCount;
+                }
+            }
+            return total;
+        }
+        set
+        {
+            circleCount = value;
+            if (currentLevelCCL !=null)
+            {
+                if (circleCount == currentLevelCCL.CircleCount)
+                {
+                    //win
+                    StartCoroutine(DelaySometimeWin(2f));
+                }
+            }
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -45,10 +85,21 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private void Init()
+    public void Init()
     {
+        UnLoadResource();
+        UIManager.Instance.LoadUI(UIID.MainUI);
         SetGameInput();
         playerController.Init(gameInput.Player);
+        circleCount = 0;
+        UnPauseGame();
+    }
+
+    private void UnLoadResource()
+    {
+        UnLoadLevel();
+        PollManager.Instance.ResetPoll();
+        CacheComponentManager.Instance.ResetCache();
     }
 
     private void SetGameInput()
@@ -64,12 +115,27 @@ public class GameManager : Singleton<GameManager>
     // Be called By UI Event 
     //
     public void Play()
-    { 
+    {
+        UnLoadResource();
+        startPlayTime = Time.time;
         StartLevel();
         playerController.Play();
         GameUIManager.Instance.LoadUI(UIID.InGameUI);
     }
+
+
+    public void Home()
+    {
+        Init();
+    }
+
+    public void PlayAgain()
+    {
+        Home();
+        Play();
+    }
     
+   
     //
     //
     //
@@ -87,6 +153,29 @@ public class GameManager : Singleton<GameManager>
     }
 
 
+
+    public void Lose()
+    {
+        UnLoadResource();
+        UIManager.Instance.LoadUI(UIID.LoseUI);
+    }
+
+
+
+    IEnumerator DelaySometimeWin(float t)
+    {
+        GameDataController.NextLevel();
+        yield return 
+            new WaitForSeconds(t);
+        Win();
+    }
+    public void Win()
+    {
+        UIManager.Instance.LoadUI(UIID.WinUI);
+    }
+    
+    
+
     private void OnDeSpawn()
     {
         GameDataController.OnDeSpawn();
@@ -95,8 +184,20 @@ public class GameManager : Singleton<GameManager>
     
     private void StartLevel()
     {
+      
         UnLoadLevel();
         LoadLevel();
+    }
+
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1;
     }
     
 

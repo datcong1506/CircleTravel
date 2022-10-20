@@ -51,12 +51,18 @@ public class PollManager : Singleton<PollManager>
     protected override void Awake()
     {
         base.Awake();
-        CreatePolling();
     }
 
-    private void CreatePolling()
+
+    public void ResetPoll()
     {
-        
+        CirclePoll.Recycle();
+        CircleOnAirPoll.Recycle();
+        CircleOnPostPoll.Recycle();
     }
+    
+    
+    
+
 }
 

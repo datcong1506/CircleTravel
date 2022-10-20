@@ -8,4 +8,6 @@ public enum UIID
     SettingUI,
     InGameUI,
     PauseUI,
+    LoseUI,
+    WinUI,
 }

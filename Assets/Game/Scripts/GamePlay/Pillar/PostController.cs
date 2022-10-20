@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PostController : MonoBehaviour
+public class PostController : MonoBehaviour,IInitAble,IDeSpawn
 {
     [SerializeField] private Transform selfTransform;
     public Transform SelfTransform => selfTransform;
@@ -18,14 +19,40 @@ public class PostController : MonoBehaviour
             return skinColor;
         }
     }
-    
+
+    private int circleCount = 0;
+    public int CircleCount => circleCount;
+
+    private void OnEnable()
+    {
+        Init();
+    }
+
+    private void OnDisable()
+    {
+        DeSpawn();
+    }
+
 
     public void Init(Color color)
     {
         skinColor = color;
         meshRenderer.material.color = skinColor;
+        
+    }
+    public void Init()
+    {
+        CacheComponentManager.Instance.PostCache.Add(gameObject);
+        circleCount = 0;
     }
 
+    public void DeSpawn()
+    {
+        if (CacheComponentManager.Instance != null)
+        {
+            CacheComponentManager.Instance.PostCache.Remove(gameObject);
+        }
+    }
 
 
 
@@ -38,7 +65,9 @@ public class PostController : MonoBehaviour
     public void DropToPost(CircleDropController circleDropController)
     {
         circleDropController.Init(SkinColor,topTF.position);
+        circleCount++;
     }
-    
 
+
+    
 }

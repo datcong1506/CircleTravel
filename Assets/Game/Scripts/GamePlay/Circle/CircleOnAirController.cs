@@ -26,9 +26,6 @@ public class CircleOnAirController : MonoBehaviour
     
     public void UpdatePosision(Vector3 target)
     {
-        characterJoint.connectedAnchor = Vector3.Lerp(characterJoint.connectedAnchor, target+offset+characterJoint.anchor, 0.5f);;
-        /*
-        selfTransform.position = target + offset;
-    */
+        characterJoint.connectedAnchor = Vector3.Lerp(characterJoint.connectedAnchor, target+offset+characterJoint.anchor, 0.4f);;
     }
 }

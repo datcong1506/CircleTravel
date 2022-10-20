@@ -10,21 +10,32 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private Transform root;
     public Transform Root => root;
+    private Dictionary<UIID, UICanvas> _uiMapsPrefab;
 
-    protected Dictionary<UIID, UICanvas> uiMapsPrefab;
+    protected Dictionary<UIID, UICanvas> uiMapsPrefab
+    {
+        get
+        {
+            if (_uiMapsPrefab == null)
+            {
+                ConvertListToDic();
+            }
 
-    protected Dictionary<UIID, UICanvas> uiMaps;
+            return _uiMapsPrefab;
+        }
+    }
+
+    protected Dictionary<UIID, UICanvas> uiMaps=new Dictionary<UIID, UICanvas>();
     
     protected override void Awake()
     {
         base.Awake();
         ConvertListToDic();
-        uiMaps = new Dictionary<UIID, UICanvas>();
     }
 
     private void ConvertListToDic()
     {
-        uiMapsPrefab = uiList.ConvertListToDic();
+        _uiMapsPrefab = uiList.ConvertListToDic();
     }
     /// <summary>
     ///  Disable all uicanvas before load a ui
@@ -34,6 +45,10 @@ public class UIManager : Singleton<UIManager>
     {
         UnLoadUIS();
         bool isExsist = uiMaps.ContainsKey(uiid);
+        if (isExsist)
+        {
+            isExsist = isExsist && uiMaps[uiid] != null;
+        }
         if (!isExsist)
         {
             bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
@@ -50,6 +65,10 @@ public class UIManager : Singleton<UIManager>
     public void LoadSubUI(UIID uiid, Transform nroot)
     {
         bool isExsist = uiMaps.ContainsKey(uiid);
+        if (isExsist)
+        {
+            isExsist = isExsist && uiMaps[uiid] != null;
+        }
         if (!isExsist)
         {
             bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
@@ -65,6 +84,7 @@ public class UIManager : Singleton<UIManager>
             
         }
         var targetCanvas = uiMaps[uiid];
+        targetCanvas.SetRoot(nroot);
         targetCanvas.Enter();
     }
     

@@ -232,4 +232,14 @@ public class PollsCache<T> where  T : class
     {
         return pollCache;
     }
+
+
+    public void Recycle()
+    {
+        foreach (var poll in pollCache)
+        {
+            poll.Value.Recycle();   
+        }
+    }
+        
 }

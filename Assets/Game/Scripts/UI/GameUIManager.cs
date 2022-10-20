@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUIManager : UIManager,InitAble
+public class GameUIManager : UIManager,IInitAble
 {
     private void Start()
     {
