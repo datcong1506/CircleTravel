@@ -1,19 +1,92 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DatCong;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    private Dictionary<UIID, UICanvas> uiMaps;
+    [SerializeField] private List<ListToDictionNary<UIID, UICanvas>> uiList;
 
+    [SerializeField] private Transform root;
+    public Transform Root => root;
 
+    protected Dictionary<UIID, UICanvas> uiMapsPrefab;
 
-    [SerializeField] private GameObject mainUIPrefab;
-    [SerializeField] private GameObject settingUIPrefab;
-    [SerializeField] private GameObject pauseUIPrefab;
+    protected Dictionary<UIID, UICanvas> uiMaps;
     
-    private void Init()
+    protected override void Awake()
     {
+        base.Awake();
+        ConvertListToDic();
         uiMaps = new Dictionary<UIID, UICanvas>();
     }
+
+    private void ConvertListToDic()
+    {
+        uiMapsPrefab = uiList.ConvertListToDic();
+    }
+    /// <summary>
+    ///  Disable all uicanvas before load a ui
+    /// </summary>
+    /// <param name="uiid"></param>
+    public void LoadUI(UIID uiid)
+    {
+        UnLoadUIS();
+        bool isExsist = uiMaps.ContainsKey(uiid);
+        if (!isExsist)
+        {
+            bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
+            if(!isExsistInPrefas) return;
+            var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
+            var uiGO= Instantiate(uiPrefabGO, root);
+            var uiCanvas = uiGO.GetComponent<UICanvas>();
+            uiMaps.Add(uiid,uiCanvas);
+        }
+        var targetCanvas = uiMaps[uiid];
+        targetCanvas.Enter();
+    }
+    
+    public void LoadSubUI(UIID uiid, Transform nroot)
+    {
+        bool isExsist = uiMaps.ContainsKey(uiid);
+        if (!isExsist)
+        {
+            bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
+            if(!isExsistInPrefas) return;
+            var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
+            var uiGO= Instantiate(uiPrefabGO, nroot);
+            var uiCanvas = uiGO.GetComponent<UICanvas>();
+            uiMaps.Add(uiid,uiCanvas);
+        }
+        else
+        {   
+            // set root
+            
+        }
+        var targetCanvas = uiMaps[uiid];
+        targetCanvas.Enter();
+    }
+    
+    public void UnLoadUI(UIID uiid)
+    {
+        bool isExsistUI = uiMaps.ContainsKey(uiid);
+        if (isExsistUI)
+        {
+            bool isOpening = uiMaps[uiid].IsOpening();
+            if (isOpening)
+            {
+                uiMaps[uiid].Exit();
+            }
+        }
+    }
+    public void UnLoadUIS()
+    {
+        for (int i = 0; i < uiMaps.Count; i++)
+        {
+            var uiCanvas = uiMaps.ElementAt(i);
+            UnLoadUI(uiCanvas.Key);
+        }
+    }
+    
 }

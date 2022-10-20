@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UIID
+public interface DeSpawn
 {
-    MainUI,
-    SettingUI,
-    InGameUI,
-    PauseUI,
+    public void DeSpawn();
 }

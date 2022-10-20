@@ -47,18 +47,7 @@ public class PollManager : Singleton<PollManager>
             return circleOnPostPoll;
         }
     }
-
-
-    [SerializeField] private GameObject pathPrefab;
-    private ObjectPolling pathPolling;
-    public ObjectPolling PathPolling
-    {
-        get
-        {
-            return pathPolling;
-        }
-    }
-
+    
     protected override void Awake()
     {
         base.Awake();
@@ -67,10 +56,7 @@ public class PollManager : Singleton<PollManager>
 
     private void CreatePolling()
     {
-        if (pathPolling == null)
-        {
-            pathPolling = new ObjectPolling(null, pathPrefab, 5);
-        }
+        
     }
 }
 

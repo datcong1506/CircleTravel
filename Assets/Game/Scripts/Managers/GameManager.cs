@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         Init();
-        Play();
+        // Play();
     }
 
     private void OnDestroy()
@@ -67,6 +67,7 @@ public class GameManager : Singleton<GameManager>
     { 
         StartLevel();
         playerController.Play();
+        GameUIManager.Instance.LoadUI(UIID.InGameUI);
     }
     
     //

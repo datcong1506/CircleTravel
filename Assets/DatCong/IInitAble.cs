@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UIID
+public interface InitAble
 {
-    MainUI,
-    SettingUI,
-    InGameUI,
-    PauseUI,
+    public void Init();
 }
