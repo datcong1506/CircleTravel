@@ -501,7 +501,7 @@ MonoBehaviour:
     Count: 10
     Rate: 2.5
     RandomRate: 0.172
-  - DelayTime: 2
+  - DelayTime: 3
     Speed: 1.5
     Count: 18
     Rate: 1.5

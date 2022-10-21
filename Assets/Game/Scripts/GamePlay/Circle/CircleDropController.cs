@@ -55,10 +55,10 @@ public class CircleDropController : MonoBehaviour
         Vector3 startVelocity = Vector3.Scale(direcToTarget, new Vector3(1, 0, 1)).normalized * vzx + Vector3.up * vy;
         rigidbody.velocity = startVelocity;
         rigidbody.angularVelocity=Vector3.zero;
-        StartCoroutine(Ste(t));
+        StartCoroutine(MergePosision(t));
     }
 
-    IEnumerator Ste(float t)
+    IEnumerator MergePosision(float t)
     {
         yield return new WaitForSeconds(t);
         selfTransform.position = target;
