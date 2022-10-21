@@ -48,15 +48,7 @@ public class GameManager : Singleton<GameManager>,IInitAble
     {
         get
         {
-            int total = 0;
-            if (currentLevelCCL != null)
-            {
-                foreach (var post in currentLevelCCL.PostControllers)
-                {
-                    total += post.CircleCount;
-                }
-            }
-            return total;
+            return circleCount;
         }
         set
         {
@@ -135,25 +127,7 @@ public class GameManager : Singleton<GameManager>,IInitAble
         Play();
     }
     
-   
-    //
-    //
-    //
-    public void Pause()
-    {
-        
-    }
     
-    //
-    //
-    //
-    public void ExitGame()
-    {
-        
-    }
-
-
-
     public void Lose()
     {
         UnLoadResource();

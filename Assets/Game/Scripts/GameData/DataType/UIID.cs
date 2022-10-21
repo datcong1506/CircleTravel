@@ -10,4 +10,5 @@ public enum UIID
     PauseUI,
     LoseUI,
     WinUI,
+    AlertUI,
 }

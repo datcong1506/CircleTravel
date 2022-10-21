@@ -62,7 +62,7 @@ public class UIManager : Singleton<UIManager>
         targetCanvas.Enter();
     }
     
-    public void LoadSubUI(UIID uiid, Transform nroot)
+    public UICanvas LoadSubUI(UIID uiid, Transform nroot)
     {
         bool isExsist = uiMaps.ContainsKey(uiid);
         if (isExsist)
@@ -72,7 +72,7 @@ public class UIManager : Singleton<UIManager>
         if (!isExsist)
         {
             bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
-            if(!isExsistInPrefas) return;
+            if(!isExsistInPrefas) return null; 
             var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
             var uiGO= Instantiate(uiPrefabGO, nroot);
             var uiCanvas = uiGO.GetComponent<UICanvas>();
@@ -86,8 +86,15 @@ public class UIManager : Singleton<UIManager>
         var targetCanvas = uiMaps[uiid];
         targetCanvas.SetRoot(nroot);
         targetCanvas.Enter();
+
+        return targetCanvas;
     }
     
+    
+    public UICanvas LoadSubUI(UIID uiid)
+    {
+        return LoadSubUI(uiid,root);
+    }
     public void UnLoadUI(UIID uiid)
     {
         bool isExsistUI = uiMaps.ContainsKey(uiid);

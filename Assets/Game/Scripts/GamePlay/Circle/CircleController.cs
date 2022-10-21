@@ -34,6 +34,8 @@ public class CircleController : MonoBehaviour,IInitAble,IDeSpawn
     //State
     [SerializeField]private CircleState circleState;
     //
+    private bool isAlert = false;
+
 
     [SerializeField] private GameObject circleOnAirPrefab;
 
@@ -46,30 +48,14 @@ public class CircleController : MonoBehaviour,IInitAble,IDeSpawn
     {
         DeSpawn();
     }
+    
 
-
-    public void Init(PathCreator pathCreator, float speed, Material material)
-    {
-        this.pathCreator = pathCreator;
-        this.speed = speed;
-        meshRender.material = material;
-        circleState = CircleState.Move;
-        timeFromSpawn = 0;
-        selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
-
-    }
-    public void Init(PathCreator pathCreator, Material material)
-    {
-        this.pathCreator = pathCreator;
-        meshRender.material = material;
-        circleState = CircleState.Move;
-        timeFromSpawn = 0;
-    }
      public void Init(PathCreator pathCreator)
     {
         this.pathCreator = pathCreator;
         circleState = CircleState.Move;
         timeFromSpawn = 0;
+        isAlert = false;
         selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
     }
 
@@ -78,6 +64,11 @@ public class CircleController : MonoBehaviour,IInitAble,IDeSpawn
      {
          skinColor = color;
          meshRender.material.color = skinColor;
+     }
+
+     public void SetSpeed(float speed)
+     {
+         this.speed = speed;
      }
      
      
@@ -99,8 +90,23 @@ public class CircleController : MonoBehaviour,IInitAble,IDeSpawn
                 gameObject.SetActive(false);
                 // lose game
                 GameManager.Instance.Lose();
+                return;
             }
-            selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
+
+            if (!isAlert)
+            {
+                var distanceToEnd = pathCreator.path.length - distance;
+                if (distanceToEnd < ConstantValue.ALERT_DISTANCE)
+                {
+                    var alertCanvas=(GameUIManager.Instance as GameUIManager).LoadSubUIInTopLayer((UIID.AlertUI));
+                    (alertCanvas as UIAlertController).SetOwn(this);
+                    isAlert = true;
+                }
+            
+            }
+            
+            
+            selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn)+Vector3.up;
         }
     }
     

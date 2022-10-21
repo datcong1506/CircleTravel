@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameUIManager : UIManager,IInitAble
 {
+    [SerializeField] private Transform topLayer;
+    
     private void Start()
     {
         Init();
@@ -13,5 +15,10 @@ public class GameUIManager : UIManager,IInitAble
     public void Init()
     {
         LoadUI(UIID.MainUI);
+    }
+
+    public UICanvas LoadSubUIInTopLayer(UIID uiid)
+    {
+        return LoadSubUI(uiid, topLayer);
     }
 }

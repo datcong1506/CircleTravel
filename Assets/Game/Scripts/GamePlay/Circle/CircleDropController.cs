@@ -49,19 +49,21 @@ public class CircleDropController : MonoBehaviour
     private void Throw()
     {
         var direcToTarget = target - startPosision;
-        float vy0 = 9f;
-
-        float deltaY = direcToTarget.y;
-
-        var timeToTarget = Mathf.Sqrt(Mathf.Abs(2 * deltaY / gravity));
-
-        var direcXZtoTarget = Vector3.Scale(direcToTarget, new Vector3(1, 0, 1));
-        float vxz0 = direcXZtoTarget.magnitude / timeToTarget;
-
-        Vector3 startVelocity = direcXZtoTarget.normalized * vxz0;
-
+        float t = 0.2f;
+        float vzx = Vector3.Scale(direcToTarget, new Vector3(1, 0, 1)).magnitude / t;
+        float vy = (direcToTarget.y - gravity * t * t * 0.5f) / t;
+        Vector3 startVelocity = Vector3.Scale(direcToTarget, new Vector3(1, 0, 1)).normalized * vzx + Vector3.up * vy;
         rigidbody.velocity = startVelocity;
+        rigidbody.angularVelocity=Vector3.zero;
+        StartCoroutine(Ste(t));
+    }
 
+    IEnumerator Ste(float t)
+    {
+        yield return new WaitForSeconds(t);
+        selfTransform.position = target;
+        rigidbody.velocity =
+            Vector3.Lerp(rigidbody.velocity, Vector3.up*-5f,0.7f);
     }
     
 }
