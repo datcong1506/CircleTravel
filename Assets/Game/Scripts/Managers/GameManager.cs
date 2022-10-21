@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>,IInitAble
     }
     
 
-    private int circleCount = 0;
+    [SerializeField]private int circleCount = 0;
 
     public int CircleCount
     {
@@ -109,6 +109,7 @@ public class GameManager : Singleton<GameManager>,IInitAble
     public void Play()
     {
         UnLoadResource();
+        circleCount = 0;
         startPlayTime = Time.time;
         StartLevel();
         playerController.Play();
