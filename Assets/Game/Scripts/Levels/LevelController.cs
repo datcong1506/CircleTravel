@@ -5,15 +5,35 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    [System.Serializable]
+    public class SpawnWave
+    {
+        public float DelayTime;
+        public int Count;
+        public float Rate;
+        [Range(0,0.3f)]public float RandomRate=0.1f;
+    }
+
+    [SerializeField] private SpawnWave[] waves;
+    
+    
 
     [SerializeField] private PostController[] postControllers;
     public PostController[] PostControllers => postControllers;
     [SerializeField] private RoadController[] roadControllers;
     public RoadController[] RoadControllers => roadControllers;
     //NOTE: This must greater or equal than pollarController's Length
-    [Header("Greater or equal piller count")]
-    [SerializeField]private int circleCount;
-    public int CircleCount => circleCount;
+    public int CircleCount {
+        get
+        {
+            int total = 0;
+            foreach (var wave in waves)
+            {
+                total += wave.Count;
+            }
+            return total;
+        }
+    }
     private Color[] colorPatllets;
     
     //NOTE: use this to spawn color circle
@@ -26,6 +46,7 @@ public class LevelController : MonoBehaviour
         SetColorStorage();
         SetPillars();
         SetRoads();
+        StartCoroutine(SpawnCircles());
     }
 
     private void SetPillars()
@@ -40,20 +61,36 @@ public class LevelController : MonoBehaviour
     private void SetRoads()
     {
         RoadController roadController;
-        for (int i = 0; i < roadControllers.Length-1; i++)
+        for (int i = 0; i < roadControllers.Length; i++)
         {
             roadController = roadControllers[i];
-            roadController.Init(this,circleCount/roadControllers.Length);
+            roadController.Init(this);
         }
-
-        if (roadControllers.Length > 0)
-        {
-            roadController = roadControllers[roadControllers.Length - 1];
-            roadController.Init(this, (circleCount / roadControllers.Length) + circleCount % roadControllers.Length);
-        }
-      
     }
 
+    
+    
+
+    
+    private IEnumerator SpawnCircles()
+    {
+        for (int i = 0; i < waves.Length; i++)
+        {
+            var wave = waves[i];
+            if (wave.DelayTime > 0)
+            {
+                yield return new WaitForSeconds(wave.DelayTime);
+            }
+            for (int j = 0; j < wave.Count; j++)
+            {
+                var roadCount = roadControllers.Length;
+                var randomIndexRoad = UnityEngine.Random.Range(0, roadCount);
+                roadControllers[randomIndexRoad].SpawnCircle(SpawnCircle());
+                yield return new WaitForSeconds(wave.Rate*UnityEngine.Random.Range(1f-wave.RandomRate,1f+wave.RandomRate));
+            }
+        }
+    }
+    
 
     private void SetColorStorage()
     {

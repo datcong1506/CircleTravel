@@ -342,13 +342,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34352abdd64e50a4c836ea4132f79853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves:
+  - DelayTime: 1
+    Count: 5
+    Rate: 1
+    RandomRate: 0.059
+  - DelayTime: 3
+    Count: 10
+    Rate: 1
+    RandomRate: 0.075
   postControllers:
   - {fileID: 8542624871657479508}
   - {fileID: 3756263651960375034}
   - {fileID: 8561264562256128948}
   roadControllers:
   - {fileID: 6199320659688864815}
-  circleCount: 20
 --- !u!1 &4157475544377061600
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +459,6 @@ MonoBehaviour:
   pathCreator: {fileID: 4157475542558946292}
   spawnRate: 1
   startSpawnTime: 1
-  spawnCount: 100
 --- !u!1 &5398415075715748846
 GameObject:
   m_ObjectHideFlags: 0

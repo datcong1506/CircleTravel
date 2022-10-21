@@ -9,31 +9,15 @@ public class RoadController : MonoBehaviour
     [SerializeField] private float spawnRate;
     [SerializeField] private float startSpawnTime;
     
-    [Header("Set In Runtime")]
-    [SerializeField] private int spawnCount;
-    
     //NOTE:this can be drag from inspector
     private LevelController levelController;
-    public void Init(LevelController levelController,int spawnCount)
+    public void Init(LevelController levelController)
     {
         this.levelController = levelController;
-        this.spawnCount = spawnCount;
-        StartCoroutine(SpawnCircles());
     }
-
-    private IEnumerator SpawnCircles()
+    
+    public void SpawnCircle(CircleController circleController)
     {
-        yield return new WaitForSeconds(startSpawnTime);
-        for (int i = 0; i < spawnCount; i++)
-        {
-            SpawnCircle();
-            yield return new WaitForSeconds(spawnRate);
-        }
-    }
-
-    private void SpawnCircle()
-    {
-        var circleCCL = levelController.SpawnCircle();
-        circleCCL.Init(pathCreator);
+        circleController.Init(pathCreator);
     }
 }

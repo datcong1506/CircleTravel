@@ -100,7 +100,7 @@ public class CircleController : MonoBehaviour,IInitAble,IDeSpawn
                 // lose game
                 GameManager.Instance.Lose();
             }
-            selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn);
+            selfTransform.position = pathCreator.path.GetPointAtDistance(speed * timeFromSpawn)+Vector3.up;
         }
     }
     
