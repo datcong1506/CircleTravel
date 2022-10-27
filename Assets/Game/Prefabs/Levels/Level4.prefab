@@ -56,11 +56,11 @@ MonoBehaviour:
       - {x: -0.23794577, y: 0, z: 1.8502419}
       - {x: -0.15014681, y: 0, z: 0.78508246}
       - {x: -0.009332072, y: 0, z: -0.92325515}
-      - {x: 1.7459607, y: 0, z: -1.2113373}
-      - {x: 3.0637686, y: 0, z: -2.849067}
-      - {x: 4.6092834, y: 0, z: -4.769786}
-      - {x: 8.313757, y: -0.780393, z: -4.1465654}
-      - {x: 10.30745, y: 0, z: -2.5311844}
+      - {x: 0.4157914, y: -0.041926466, z: -1.7363218}
+      - {x: 2.0719528, y: 0.000055395067, z: -3.0969248}
+      - {x: 4.5762815, y: 0.030234754, z: -4.639415}
+      - {x: 9.347418, y: -0.7950883, z: -3.95537}
+      - {x: 10.771029, y: 0.20969874, z: -1.4537573}
       isClosed: 0
       space: 0
       controlMode: 2
@@ -169,17 +169,17 @@ MonoBehaviour:
       points:
       - {x: 12.99661, y: 0, z: 6.3499336}
       - {x: 12.450929, y: 0, z: 5.9369397}
-      - {x: 5.848981, y: 0, z: 3.8271134}
-      - {x: 4.147705, y: 0, z: 1.8001885}
-      - {x: 3.3315182, y: 0, z: 0.82777154}
-      - {x: 2.313686, y: 0, z: 0.0960443}
-      - {x: 1.5839906, y: 0, z: -0.6848627}
-      - {x: 1.0950252, y: 0, z: -1.2081448}
-      - {x: 0.9802986, y: 0, z: -1.7066684}
-      - {x: -0.7586467, y: 0, z: -2.8877041}
-      - {x: -3.1278732, y: 0, z: -4.496806}
-      - {x: -3.653572, y: 0, z: -4.8923545}
-      - {x: -5.318593, y: 0, z: -4.949538}
+      - {x: 6.498292, y: 0, z: 6.0037274}
+      - {x: 4.306399, y: 0, z: 3.4532518}
+      - {x: 3.757807, y: 0, z: 2.814913}
+      - {x: 2.8511581, y: 0, z: 2.220231}
+      - {x: 2.27318, y: 0, z: 0.8079995}
+      - {x: 1.8614054, y: 0, z: -0.1981307}
+      - {x: 1.0829378, y: 0, z: -1.8439759}
+      - {x: -0.27474394, y: 0, z: -3.0067787}
+      - {x: -2.2433207, y: 0, z: -4.69279}
+      - {x: -3.995804, y: 0, z: -4.3603473}
+      - {x: -5.444136, y: 0, z: -4.5730205}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10.4
+    OrthographicSize: 11.04
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -794,7 +794,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6306767037801484548}
   m_LocalRotation: {x: -0.13355748, y: -0, z: -0, w: 0.99104106}
-  m_LocalPosition: {x: 3.446691, y: 2.63, z: -0.81}
+  m_LocalPosition: {x: 4.2, y: 2.63, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -958,7 +958,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.72
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
@@ -1045,7 +1045,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.84
+      value: 0.54
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}

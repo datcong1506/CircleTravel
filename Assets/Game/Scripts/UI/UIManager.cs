@@ -25,8 +25,8 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    protected Dictionary<UIID, UICanvas> uiMaps=new Dictionary<UIID, UICanvas>();
-    
+    protected Dictionary<UIID, UICanvas> uiMaps = new Dictionary<UIID, UICanvas>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -52,16 +52,16 @@ public class UIManager : Singleton<UIManager>
         if (!isExsist)
         {
             bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
-            if(!isExsistInPrefas) return;
+            if (!isExsistInPrefas) return;
             var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
-            var uiGO= Instantiate(uiPrefabGO, root);
+            var uiGO = Instantiate(uiPrefabGO, root);
             var uiCanvas = uiGO.GetComponent<UICanvas>();
-            uiMaps.Add(uiid,uiCanvas);
+            uiMaps.Add(uiid, uiCanvas);
         }
         var targetCanvas = uiMaps[uiid];
         targetCanvas.Enter();
     }
-    
+
     public UICanvas LoadSubUI(UIID uiid, Transform nroot)
     {
         bool isExsist = uiMaps.ContainsKey(uiid);
@@ -72,16 +72,16 @@ public class UIManager : Singleton<UIManager>
         if (!isExsist)
         {
             bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
-            if(!isExsistInPrefas) return null; 
+            if (!isExsistInPrefas) return null;
             var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
-            var uiGO= Instantiate(uiPrefabGO, nroot);
+            var uiGO = Instantiate(uiPrefabGO, nroot);
             var uiCanvas = uiGO.GetComponent<UICanvas>();
-            uiMaps.Add(uiid,uiCanvas);
+            uiMaps.Add(uiid, uiCanvas);
         }
         else
-        {   
+        {
             // set root
-            
+
         }
         var targetCanvas = uiMaps[uiid];
         targetCanvas.SetRoot(nroot);
@@ -89,11 +89,41 @@ public class UIManager : Singleton<UIManager>
 
         return targetCanvas;
     }
-    
-    
+
+    public UICanvas LoadUITop(UIID uiid)
+    {
+        bool isExsist = uiMaps.ContainsKey(uiid);
+        if (isExsist)
+        {
+            isExsist = isExsist && uiMaps[uiid] != null;
+        }
+        if (!isExsist)
+        {
+            bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
+            if (!isExsistInPrefas) return null;
+            var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
+            var uiGO = Instantiate(uiPrefabGO);
+            var uiCanvas = uiGO.GetComponent<UICanvas>();
+            uiMaps.Add(uiid, uiCanvas);
+        }
+        else
+        {
+            // set root
+
+        }
+        var targetCanvas = uiMaps[uiid];
+        targetCanvas.SetRoot(root);
+        targetCanvas.transform.SetAsFirstSibling();
+        targetCanvas.Enter();
+
+        return targetCanvas;
+    }
+
+
+
     public UICanvas LoadSubUI(UIID uiid)
     {
-        return LoadSubUI(uiid,root);
+        return LoadSubUI(uiid, root);
     }
     public void UnLoadUI(UIID uiid)
     {
@@ -115,5 +145,5 @@ public class UIManager : Singleton<UIManager>
             UnLoadUI(uiCanvas.Key);
         }
     }
-    
+
 }

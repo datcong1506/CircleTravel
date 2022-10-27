@@ -5,25 +5,23 @@ using UnityEngine;
 public class UISettingController : UICanvas
 {
     [SerializeField] private Animator animator;
-    
+
 
 
     public void SoundButton()
     {
-        animator.SetBool("UseSound",!animator.GetBool("UseSound"));
+        animator.SetBool("UseSound", !animator.GetBool("UseSound"));
     }
 
 
     public void VibButton()
     {
-        Debug.Log("okia");
-        animator.SetBool("UseVib",!animator.GetBool("UseVib"));
-
+        animator.SetBool("UseVib", !animator.GetBool("UseVib"));
     }
-    
+
     public void ExitButton()
     {
         Exit();
     }
-    
+
 }

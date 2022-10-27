@@ -14,15 +14,15 @@ public enum PlayerState
 }
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]private PlayerState playerState;
+    [SerializeField] private PlayerState playerState;
     [SerializeField] private Vector3 offset;
     private Camera mainCamera;
     private Transform cameraTransform;
-    [SerializeField]private GameInput.PlayerActions playerInput;
+    [SerializeField] private GameInput.PlayerActions playerInput;
     [SerializeField] private LayerMask circleLayer;
     [SerializeField] private LayerMask postLayer;
     // Input
-    [SerializeField]private bool isClicked;
+    [SerializeField] private bool isClicked;
     //
 
     private CircleController currentCircleController;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private CircleOnAirController circleOnAirController;
     [SerializeField] private Transform handTF;
-        
+
     private void Update()
     {
         SetInput();
@@ -40,9 +40,9 @@ public class PlayerController : MonoBehaviour
 
     public void Init(GameInput.PlayerActions playerInput)
     {
-        mainCamera=Camera.main;
+        mainCamera = Camera.main;
         cameraTransform = mainCamera.GetComponent<Transform>();
-        
+
         this.playerInput = playerInput;
         this.playerInput.Enable();
         this.playerInput.Move.Enable();
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         playerState = PlayerState.Relax;
     }
-    
+
     private void OnDeSpawn()
     {
         playerInput.Disable();
@@ -78,22 +78,22 @@ public class PlayerController : MonoBehaviour
                 {
                     TryTakeCircle();
                 }
-                
+
                 break;
             case PlayerState.HoldCircle:
                 TakeCircle();
                 DropCircle();
                 break;
         }
-        
+
     }
-    
+
     private void TryTakeCircle()
     {
         RaycastHit hit;
         var touchPosision = playerInput.Move.ReadValue<Vector2>();
         Ray ray = mainCamera.ScreenPointToRay(touchPosision);
-        if (Physics.Raycast(ray,out hit, 10000, circleLayer))
+        if (Physics.Raycast(ray, out hit, 10000, circleLayer))
         {
             if (CacheComponentManager.Instance.CCCache.TryGet(hit.collider.gameObject, out var circleController))
             {
@@ -101,9 +101,9 @@ public class PlayerController : MonoBehaviour
                 {
                     currentCircleController = circleController;
                     var color = currentCircleController.SkinColor;
-                    var circleOnAirGO= currentCircleController.OnBeTake();
+                    var circleOnAirGO = currentCircleController.OnBeTake();
                     circleOnAirController = circleOnAirGO.GetComponent<CircleOnAirController>();
-                    circleOnAirController.Init(currentCircleController.transform,color,currentCircleController.SelfTransform.position);
+                    circleOnAirController.Init(currentCircleController.transform, color, currentCircleController.SelfTransform.position);
                     playerState = PlayerState.HoldCircle;
                 }
             }
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     //just update posision
     private void TakeCircle()
     {
-        var touchPosision = playerInput.Move.ReadValue<Vector2>();        
+        var touchPosision = playerInput.Move.ReadValue<Vector2>();
         Ray ray = mainCamera.ScreenPointToRay(touchPosision);
 
 
@@ -120,20 +120,20 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(touchPosision+" "+ worldPoint);
         circleOnAirController.UpdatePosision(worldPoint);
     }
-    
+
     private void DropCircle()
     {
 
 
         if (!isClicked)
         {
-            var touchPosision = playerInput.Move.ReadValue<Vector2>();        
+            var touchPosision = playerInput.Move.ReadValue<Vector2>();
             Ray ray = mainCamera.ScreenPointToRay(mainCamera.WorldToScreenPoint(circleOnAirController.SelfTransform.position));
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 10000, postLayer))
             {
-                if(CacheComponentManager.Instance.PostCache.TryGet(hit.collider.gameObject,out var postController))
+                if (CacheComponentManager.Instance.PostCache.TryGet(hit.collider.gameObject, out var postController))
                 {
                     if (postController.CanDrop(currentCircleController))
                     {
@@ -150,19 +150,12 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-           
-            
         }
-        
-       
-
         if (!isClicked)
         {
             currentCircleController.BackToRoad();
             circleOnAirController.gameObject.SetActive(false);
             playerState = PlayerState.Relax;
         }
-        
-        
     }
 }

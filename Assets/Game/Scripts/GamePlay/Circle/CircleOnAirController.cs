@@ -11,7 +11,7 @@ public class CircleOnAirController : MonoBehaviour
     [SerializeField] private CharacterJoint characterJoint;
     [SerializeField] private GameObject circleOnPostPrefab;
     public GameObject CircleOnPostPrefab => circleOnPostPrefab;
-    public void Init(Transform circle,Color color)
+    public void Init(Transform circle, Color color)
     {
         renderer.material.color = color;
         selfTransform.position = circle.position;
@@ -23,9 +23,13 @@ public class CircleOnAirController : MonoBehaviour
         Init(circle, color);
         characterJoint.connectedAnchor = posision + characterJoint.anchor;
     }
-    
+
     public void UpdatePosision(Vector3 target)
     {
-        characterJoint.connectedAnchor = Vector3.Lerp(characterJoint.connectedAnchor, target+offset+characterJoint.anchor, 0.7f);;
+        var targetRealPosision = target + offset + characterJoint.anchor;
+        if ((targetRealPosision - characterJoint.connectedAnchor).magnitude > 0.05f)
+        {
+            characterJoint.connectedAnchor = Vector3.Lerp(characterJoint.connectedAnchor, target + offset + characterJoint.anchor, 0.8f); ;
+        }
     }
 }

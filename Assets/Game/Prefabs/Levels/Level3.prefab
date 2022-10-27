@@ -310,19 +310,19 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -6.457299, y: 0, z: 1.8758748}
-      - {x: -5.3518763, y: 0, z: 1.9544349}
-      - {x: -4.1876936, y: 0, z: 3.8713074}
-      - {x: -1.5592399, y: 0, z: 3.5647254}
-      - {x: 0.005135417, y: 0, z: 3.3822572}
-      - {x: 1.4961916, y: 0, z: 0.380297}
-      - {x: 1.5839906, y: 0, z: -0.6848627}
-      - {x: 1.7248054, y: 0, z: -2.3932}
-      - {x: 1.4746524, y: 0, z: -2.8937495}
-      - {x: -0.2642929, y: 0, z: -4.074785}
-      - {x: -2.6335194, y: 0, z: -5.6838875}
-      - {x: -4.123565, y: 0, z: -4.2367053}
-      - {x: -5.788586, y: 0, z: -4.293889}
+      - {x: -6.5754066, y: 0, z: 1.7872648}
+      - {x: -5.6246986, y: 0, z: 2.6062393}
+      - {x: -4.066421, y: 0, z: 4.853634}
+      - {x: -1.3705313, y: 0, z: 3.7284656}
+      - {x: 0.40441656, y: 0, z: 2.9876657}
+      - {x: 1.2613364, y: 0, z: 1.931087}
+      - {x: 1.5708101, y: 0, z: 0.0056589837}
+      - {x: 1.8606994, y: 0, z: -1.7979234}
+      - {x: 1.1561894, y: 0, z: -3.2481713}
+      - {x: -0.12958084, y: 0, z: -4.1811}
+      - {x: -2.7282908, y: 0, z: -6.066671}
+      - {x: -4.6015406, y: 0, z: -4.5928187}
+      - {x: -5.9515514, y: 0, z: -4.1383743}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10.4
+    OrthographicSize: 11.4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -867,19 +867,19 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -6.457299, y: 0, z: 1.8758748}
-      - {x: -5.3518763, y: 0, z: 1.9544349}
-      - {x: -4.1876936, y: 0, z: 3.8713074}
-      - {x: -1.5592399, y: 0, z: 3.5647254}
-      - {x: 0.005135417, y: 0, z: 3.3822572}
-      - {x: 1.4961916, y: 0, z: 0.380297}
-      - {x: 1.5839906, y: 0, z: -0.6848627}
-      - {x: 1.7248054, y: 0, z: -2.3932}
-      - {x: 1.4746524, y: 0, z: -2.8937495}
-      - {x: -0.2642929, y: 0, z: -4.074785}
-      - {x: -2.6335194, y: 0, z: -5.6838875}
-      - {x: -4.123565, y: 0, z: -4.2367053}
-      - {x: -5.788586, y: 0, z: -4.293889}
+      - {x: -7.9454346, y: 0, z: 1.9678645}
+      - {x: -7.164284, y: 0, z: 2.6290686}
+      - {x: -4.6947865, y: 0, z: 4.4702845}
+      - {x: -2.0729234, y: 0, z: 4.111681}
+      - {x: 0.8987435, y: 0, z: 3.7052336}
+      - {x: 1.2805064, y: 0, z: 1.0239217}
+      - {x: 1.3407396, y: 0, z: -0.04315232}
+      - {x: 1.493907, y: 0, z: -2.7566173}
+      - {x: 0.79660875, y: 0, z: -4.351185}
+      - {x: -1.3423685, y: 0, z: -5.255421}
+      - {x: -3.4196434, y: 0, z: -6.133573}
+      - {x: -6.04343, y: 0, z: -4.580226}
+      - {x: -7.6056566, y: 0, z: -4.209777}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -958,7 +958,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
@@ -968,7 +968,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.23
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
@@ -1045,7 +1045,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.86
+      value: 3.79
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
@@ -1055,7 +1055,7 @@ PrefabInstance:
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.46
+      value: -3.86
       objectReference: {fileID: 0}
     - target: {fileID: 3500692251421518800, guid: 8e214a2b7427f91459a72ee825a7f1ab,
         type: 3}
