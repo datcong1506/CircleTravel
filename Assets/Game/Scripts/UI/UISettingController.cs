@@ -6,13 +6,10 @@ public class UISettingController : UICanvas
 {
     [SerializeField] private Animator animator;
 
-
-
     public void SoundButton()
     {
         animator.SetBool("UseSound", !animator.GetBool("UseSound"));
     }
-
 
     public void VibButton()
     {

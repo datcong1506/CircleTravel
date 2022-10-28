@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIWinController : UICanvas,IInitAble
+public class UIWinController : UICanvas, IInitAble
 {
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI timeEclapseText;
-
 
     public override void Enter()
     {
@@ -21,14 +20,13 @@ public class UIWinController : UICanvas,IInitAble
         timeEclapseText.text = ConvertSecondToMin(GameManager.Instance.EclapseTime);
     }
 
-
     private string ConvertSecondToMin(float second)
     {
         int min = (int)second / 60;
 
         if (min > 0)
         {
-            return min.ToString() + "p" + (((int) second) % 60).ToString() + "s";
+            return min.ToString() + "p" + (((int)second) % 60).ToString() + "s";
         }
         else
         {

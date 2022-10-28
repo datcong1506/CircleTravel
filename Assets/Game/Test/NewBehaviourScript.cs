@@ -8,10 +8,19 @@ using UnityEngine.EventSystems;
 public class NewBehaviourScript : MonoBehaviour
 {
 
-    [SerializeField] private PathCreator pathCreator;
+    public bool IsGlobal;
+
+    public Vector3 Value;
 
     private void Update()
     {
-        pathCreator.bezierPath.SetPoint(0,Vector3.left);
+        if (IsGlobal)
+        {
+            transform.position = Value;
+        }
+        else
+        {
+            transform.localPosition = Value;
+        }
     }
 }
