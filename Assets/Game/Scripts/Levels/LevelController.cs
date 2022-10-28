@@ -100,6 +100,11 @@ public class LevelController : MonoBehaviour
     {
         for (int i = 0; i < waves.Length; i++)
         {
+            yield return new WaitForSeconds(0.5f);
+            var warmingUICanvas = (GameUIManager.Instance as GameUIManager).LoadSubUIInTopLayer(UIID.WaveWarmingUI) as UIWaveWarming;
+            warmingUICanvas.SetMessage(i + 1);
+
+
             var wave = waves[i];
             if (wave.DelayTime > 0)
             {
@@ -111,6 +116,15 @@ public class LevelController : MonoBehaviour
                 var randomIndexRoad = UnityEngine.Random.Range(0, roadCount);
                 roadControllers[randomIndexRoad].SpawnCircle(SpawnCircle(wave.Speed));
                 yield return new WaitForSeconds(wave.Rate * UnityEngine.Random.Range(1f - wave.RandomRate, 1f + wave.RandomRate));
+            }
+            while (true)
+            {
+                if (GameManager.Instance.CircleCount < wave.Count)
+                {
+                    yield return null;
+                    continue;
+                }
+                break;
             }
         }
     }

@@ -497,13 +497,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - DelayTime: 1
-    Speed: 1.2
+    Speed: 1
     Count: 10
     Rate: 2.5
     RandomRate: 0.172
   - DelayTime: 3
-    Speed: 1.5
-    Count: 18
+    Speed: 1.2
+    Count: 14
     Rate: 1.5
     RandomRate: 0.089
   cinemachineVirtualCamera: {fileID: 1013068002315837232}

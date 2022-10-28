@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUIManager : UIManager,IInitAble
+public class GameUIManager : UIManager, IInitAble
 {
     [SerializeField] private Transform topLayer;
-    
+
     private void Start()
     {
         Init();

@@ -127,6 +127,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void UnLoadUI(UIID uiid)
     {
+        Debug.Log(uiid);
         bool isExsistUI = uiMaps.ContainsKey(uiid);
         if (isExsistUI)
         {

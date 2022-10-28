@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour
                             PollManager.Instance.CircleOnPostPoll.Instantiate(circleOnAirController.CircleOnPostPrefab);
                         var dropCircleController = dropCircleGO.GetComponent<CircleDropController>();
                         dropCircleController.SetPosision(circleOnAirController.SelfTransform.position);
+                        dropCircleController.SetRotation(circleOnAirController.SelfTransform.rotation);
                         postController.DropToPost(dropCircleController);
                         circleOnAirController.gameObject.SetActive(false);
                         playerState = PlayerState.Relax;

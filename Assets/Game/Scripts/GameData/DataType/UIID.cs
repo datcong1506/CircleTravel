@@ -11,4 +11,5 @@ public enum UIID
     LoseUI,
     WinUI,
     AlertUI,
+    WaveWarmingUI,
 }
