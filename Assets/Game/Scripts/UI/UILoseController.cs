@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UILoseController : UICanvas,IInitAble
+public class UILoseController : UICanvas, IInitAble
 {
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI circleCountText;
-
 
     public override void Enter()
     {
@@ -18,9 +17,8 @@ public class UILoseController : UICanvas,IInitAble
     public void Init()
     {
         levelText.text = GameManager.Instance.GameDataController.GetCurrentLevel().name;
-        circleCountText.text = GameManager.Instance.CircleCount.ToString()+"/"+GameManager.Instance.CurrentLevelCcl.CircleCount;
+        circleCountText.text = GameManager.Instance.CircleCount.ToString() + "/" + GameManager.Instance.CircleCount;
     }
-
 
     public void HomeButton()
     {

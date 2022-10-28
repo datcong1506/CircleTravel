@@ -11,13 +11,15 @@ public class UIAlertController : UICanvas
     {
         belongCircle = circleController;
     }
-    
-    
+
+
     private void Update()
     {
         UpdateAlert();
     }
 
+
+    // simple
     private void UpdateAlert()
     {
         if (belongCircle != null)

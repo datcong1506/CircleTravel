@@ -41,28 +41,13 @@ public class UIManager : Singleton<UIManager>
     ///  Disable all uicanvas before load a ui
     /// </summary>
     /// <param name="uiid"></param>
-    public void LoadUI(UIID uiid)
+    public UICanvas LoadUI(UIID uiid)
     {
         UnLoadUIS();
-        bool isExsist = uiMaps.ContainsKey(uiid);
-        if (isExsist)
-        {
-            isExsist = isExsist && uiMaps[uiid] != null;
-        }
-        if (!isExsist)
-        {
-            bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
-            if (!isExsistInPrefas) return;
-            var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
-            var uiGO = Instantiate(uiPrefabGO, root);
-            var uiCanvas = uiGO.GetComponent<UICanvas>();
-            uiMaps.Add(uiid, uiCanvas);
-        }
-        var targetCanvas = uiMaps[uiid];
-        targetCanvas.Enter();
+        return JustLoadUI(uiid, root);
     }
 
-    public UICanvas LoadSubUI(UIID uiid, Transform nroot)
+    private UICanvas JustLoadUI(UIID uiid, Transform nroot)
     {
         bool isExsist = uiMaps.ContainsKey(uiid);
         if (isExsist)
@@ -90,41 +75,24 @@ public class UIManager : Singleton<UIManager>
         return targetCanvas;
     }
 
-    public UICanvas LoadUITop(UIID uiid)
+    public UICanvas LoadSubUI(UIID uiid, Transform nroot)
     {
-        bool isExsist = uiMaps.ContainsKey(uiid);
-        if (isExsist)
-        {
-            isExsist = isExsist && uiMaps[uiid] != null;
-        }
-        if (!isExsist)
-        {
-            bool isExsistInPrefas = uiMapsPrefab.ContainsKey(uiid);
-            if (!isExsistInPrefas) return null;
-            var uiPrefabGO = uiMapsPrefab[uiid].gameObject;
-            var uiGO = Instantiate(uiPrefabGO);
-            var uiCanvas = uiGO.GetComponent<UICanvas>();
-            uiMaps.Add(uiid, uiCanvas);
-        }
-        else
-        {
-            // set root
-
-        }
-        var targetCanvas = uiMaps[uiid];
-        targetCanvas.SetRoot(root);
-        targetCanvas.transform.SetAsFirstSibling();
-        targetCanvas.Enter();
-
-        return targetCanvas;
+        return JustLoadUI(uiid, nroot);
     }
 
-
+    public UICanvas LoadUITop(UIID uiid)
+    {
+        UnLoadUIS();
+        var targetCanvas = JustLoadUI(uiid, root);
+        targetCanvas.transform.SetAsFirstSibling();
+        return targetCanvas;
+    }
 
     public UICanvas LoadSubUI(UIID uiid)
     {
         return LoadSubUI(uiid, root);
     }
+
     public void UnLoadUI(UIID uiid)
     {
         Debug.Log(uiid);

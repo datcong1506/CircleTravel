@@ -7,11 +7,13 @@ public class CircleOnAirController : MonoBehaviour
     [SerializeField] private Transform selfTransform;
     public Transform SelfTransform => selfTransform;
     [SerializeField] private MeshRenderer renderer;
+    // offset to player touchposision to see the circle
     [SerializeField] private Vector3 offset;
     [SerializeField] private CharacterJoint characterJoint;
     [SerializeField] private GameObject circleOnPostPrefab;
     public GameObject CircleOnPostPrefab => circleOnPostPrefab;
-    public void Init(Transform circle, Color color)
+
+    private void Init(Transform circle, Color color)
     {
         renderer.material.color = color;
         selfTransform.position = circle.position;
@@ -23,7 +25,7 @@ public class CircleOnAirController : MonoBehaviour
         Init(circle, color);
         characterJoint.connectedAnchor = posision + characterJoint.anchor;
     }
-
+    // update the joint posision follow touchScreen
     public void UpdatePosision(Vector3 target)
     {
         var targetRealPosision = target + offset + characterJoint.anchor;

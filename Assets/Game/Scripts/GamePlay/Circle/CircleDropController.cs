@@ -13,9 +13,6 @@ public class CircleDropController : MonoBehaviour
     private Vector3 startPosision;
     [SerializeField] private Vector3 target;
     private bool moveToTarget = true;
-
-    [SerializeField] private float speed = 5f;
-    private float s;
     private float gravity = -10f;
 
     private Quaternion startQuaternion;
@@ -30,11 +27,10 @@ public class CircleDropController : MonoBehaviour
         render.material.color = skinColor;
         moveToTarget = true;
         target = dropPosision;
-        s = 0;
         Throw();
     }
 
-
+    // NOTUSE
     private void OnDespawn()
     {
 
@@ -67,24 +63,27 @@ public class CircleDropController : MonoBehaviour
         var distanceXZ = directotarget.magnitude;
 
         bool setDefault = false;
-        if (distanceXZ > 0.07f)
+        if (distanceXZ > 0.07f) // if drop effect descistion
         {
             setDefault = true;
         }
 
-
-
         if (selfTransform.up.y > 0 && setDefault)
         {
+            // best perform =>> cache Quaternion.Euler(180f, 0, 0)
             targetQuaternion = Quaternion.Euler(180f, 0, 0);
         }
         else
         {
+            // best perform =>> cache Quaternion.identity
             targetQuaternion = Quaternion.identity;
         }
     }
 
 
+    ///<sumary>
+    /// cal drop velocity and handle drop to target
+    ///</sumary>
     private void Throw()
     {
         var direcToTarget = target - startPosision;
@@ -96,7 +95,7 @@ public class CircleDropController : MonoBehaviour
         rigidbody.angularVelocity = Vector3.zero;
         StartCoroutine(MergePosisionAndRotation(t));
     }
-
+    // t : time to target
     IEnumerator MergePosisionAndRotation(float t)
     {
         CalTargetQuaternion();
@@ -104,6 +103,7 @@ public class CircleDropController : MonoBehaviour
         for (int i = 0; i < 1000; i++)
         {
             totalT += Time.deltaTime;
+            // Lerp rotation effect another way use angleVelocity
             selfTransform.rotation = Quaternion.Lerp(startQuaternion, targetQuaternion, totalT / t);
             if (totalT > t)
             {
@@ -112,6 +112,7 @@ public class CircleDropController : MonoBehaviour
             yield return null;
         }
 
+        // lock posision, and posision in case physic fail
         selfTransform.position = target;
         rigidbody.velocity =
             Vector3.Lerp(rigidbody.velocity, Vector3.up * -5f, 0.7f);

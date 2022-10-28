@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PostController : MonoBehaviour,IInitAble,IDeSpawn
+public class PostController : MonoBehaviour, IInitAble, IDeSpawn
 {
     [SerializeField] private Transform selfTransform;
     public Transform SelfTransform => selfTransform;
     [SerializeField] private MeshRenderer meshRenderer;
-
     [SerializeField] private Transform topTF;
-
     private Color skinColor;
     public Color SkinColor
     {
@@ -38,7 +36,7 @@ public class PostController : MonoBehaviour,IInitAble,IDeSpawn
     {
         skinColor = color;
         meshRenderer.material.color = skinColor;
-        
+
     }
     public void Init()
     {
@@ -54,8 +52,6 @@ public class PostController : MonoBehaviour,IInitAble,IDeSpawn
         }
     }
 
-
-
     public bool CanDrop(CircleController circleController)
     {
         return circleController.SkinColor == SkinColor;
@@ -64,10 +60,8 @@ public class PostController : MonoBehaviour,IInitAble,IDeSpawn
 
     public void DropToPost(CircleDropController circleDropController)
     {
-        circleDropController.Init(SkinColor,topTF.position);
+        circleDropController.Init(SkinColor, topTF.position);
         circleCount++;
     }
 
-
-    
 }

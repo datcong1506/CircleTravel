@@ -20,16 +20,17 @@ public class LevelController : MonoBehaviour
     }
     [SerializeField] private SpawnWave[] waves;
 
+    // scale object when change screen view size
+    #region 
     [System.Serializable]
     public enum POVTYPE
     {
         WIDTH,
         HEIGHT,
     }
-
     private POVTYPE povtype;
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
-
+    #endregion
 
     [SerializeField] private PostController[] postControllers;
     public PostController[] PostControllers => postControllers;
@@ -53,12 +54,11 @@ public class LevelController : MonoBehaviour
     //NOTE: use this to spawn color circle
     private Dictionary<Color, int> colorStorages;
 
-
     public void Init()
     {
         colorPatllets = GetRandomColors();
         SetColorStorage();
-        SetPillars();
+        SetPosts();
         SetRoads();
         StartCoroutine(SpawnCircles());
         SetFOV();
@@ -72,8 +72,7 @@ public class LevelController : MonoBehaviour
         cinemachineVirtualCamera.m_Lens.OrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize * (currentScale / baseScale);
     }
 
-
-    private void SetPillars()
+    private void SetPosts()
     {
         for (int i = 0; i < postControllers.Length; i++)
         {
@@ -91,10 +90,6 @@ public class LevelController : MonoBehaviour
             roadController.Init(this);
         }
     }
-
-
-
-
 
     private IEnumerator SpawnCircles()
     {
@@ -129,7 +124,6 @@ public class LevelController : MonoBehaviour
         }
     }
 
-
     private void SetColorStorage()
     {
         colorStorages = new Dictionary<Color, int>();
@@ -138,7 +132,6 @@ public class LevelController : MonoBehaviour
             colorStorages.Add(colorPatllets[i], 0);
         }
     }
-
 
     //NOTE: This is complex
     // UNDONE
@@ -153,7 +146,6 @@ public class LevelController : MonoBehaviour
         colorStorages[randomColor] = colorStorages[randomColor] + 1;
         return circleControlelr;
     }
-
 
     private Color GetRandomColor()
     {
@@ -170,7 +162,6 @@ public class LevelController : MonoBehaviour
         }
         return color;
     }
-
 
     private Color[] GetRandomColors()
     {

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// extend UIManager
 public class GameUIManager : UIManager, IInitAble
 {
     [SerializeField] private Transform topLayer;

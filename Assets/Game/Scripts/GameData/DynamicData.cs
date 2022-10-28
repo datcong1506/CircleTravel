@@ -7,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public class DynamicData
 {
-    [Header("This should be changed in runtime(ExacllyLevel)")]
+    [Header("This should be changed in runtime")]
     public string CurrentLevel;
     public bool UseSound;
     public bool UseVib;
